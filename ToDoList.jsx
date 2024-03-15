@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Pressable, View, Text, ScrollView} from 'react-native';
 
-function ToDoList ({tasks}){
+function ToDoList({ tasks }) {
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.container}>
       {tasks.map((task, index) => (
         <Pressable key={index}>
           <View style={[styles.task, styles.completed]}>
@@ -16,16 +16,25 @@ function ToDoList ({tasks}){
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    pading: 20,
+    backgroundColor: '#f9f9f9',
+  },
   task: {
     padding: 10,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-  },
-  completed: {
-    backgroundColor: '#e0e0e0',
+    borderRadius: 5,
+    backgroundColor: '#007bff',
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   taskText: {
     fontSize: 16,
+    color: '#fff',
   },
 });
 
