@@ -17,7 +17,12 @@ function App() {
   ]);
 
   const addTask = (taskText) => {
-    setTasks([...tasks, taskText]);
+  //  setTasks([...tasks, taskText]);
+
+    if (!tasks.includes(taskText)) {
+      // If it doesn't exist, add it to the tasks array
+      setTasks([...tasks, taskText]);
+    }
   };
 
   return (
