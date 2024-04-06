@@ -1,36 +1,31 @@
+/* eslint-disable prettier/prettier */
 /**
  * My To Do List App
  *
  * @format
  */
 
+import 'react-native-gesture-handler';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import TodoList from './ToDoList';
-import ToDoForm from './ToDoForm';
+import { SafeAreaView, Button, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import AboutScreen from './src/screens/AboutScreen';
+import TodoList from './src/components/ToDoList';
+import ToDoForm from './src/components/ToDoForm';
 
-function App() {
-  const [tasks, setTasks] = React.useState([
-    'Do laundry',
-    'Go to gym',
-    'Walk dog',
-  ]);
+const Stack = createNativeStackNavigator();
 
-  const addTask = (taskText) => {
-  //  setTasks([...tasks, taskText]);
-
-    if (!tasks.includes(taskText)) {
-      // If it doesn't exist, add it to the tasks array
-      setTasks([...tasks, taskText]);
-    }
-  };
-
+const App = () => {
   return (
-    <SafeAreaView>
-      <TodoList tasks={tasks} />
-      <ToDoForm addTask={addTask} />
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="About" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 export default App;
