@@ -1,9 +1,17 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {StyleSheet, View, TextInput, Button, Platform} from 'react-native';
+import tasksData from '../data/tasks.json';
 
 const ToDoForm = ({ addTask }) => {
   const [taskText, setTaskText] = React.useState('');
+  const [tasks, setTasks] = useState([]);
+  const [randomTask, setRandomTask] = useState('');
+
+  useEffect(() => {
+    // Fetch tasks from the "tasks.json" file
+    setTasks(tasksData.tasks);
+  }, []);
 
   const handleAddTask = () => {
     if (taskText.trim() === '') {
@@ -14,29 +22,32 @@ const ToDoForm = ({ addTask }) => {
     setTaskText('');
   };
 
+  const handleGenerateRandomTask = () => {
+    const randomIndex = Math.floor(Math.random() * tasks.length);
+    setRandomTask(tasks[randomIndex]);
+
   return (
     <View style={styles.form}>
       <TextInput
-      style={styles.input}
-      placeholder="Add a new task..."
-      onChangeText={(text) => setTaskText(text)}
-      value={taskText}
-      placeholderTextColor="#777"
+        style={styles.input}
+        placeholder="Add a new task..."
+        onChangeText={(text) => setTaskText(text)}
+        value={taskText}
+        placeholderTextColor="#777"
       />
       <Button title="Add" onPress={handleAddTask} />
+      <Button title="Generate Random Task" onPress={handleGenerateRandomTask} />
+      {randomTask && <TextInput style={styles.input} value={randomTask} editable={false} />}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   form: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: '#f9f9f9',
-    padding: 10,
-    marginHorizontal: 20,
-    marginTop: 20,
+    padding: 20,
+    margin: 20,
     borderRadius: 5,
     ...Platform.select({
       ios: {
@@ -51,16 +62,17 @@ const styles = StyleSheet.create({
     }),
   },
   input: {
-    flex: 1,
     borderWidth: 1,
     borderColor: '#ccc',
     paddingHorizontal: 10,
     paddingVertical: 5,
-    marginRight: 10,
+    marginBottom: 10,
     borderRadius: 5,
     backgroundColor: '#fff',
     color: '#333',
   },
 });
+
+};
 
 export default ToDoForm;

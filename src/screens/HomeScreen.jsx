@@ -2,12 +2,16 @@
 import React from 'react';
 import { Text, View, Pressable, StyleSheet } from 'react-native';
 import MainLayout from '../layouts/MainLayout';
+import ToDoList from '../components/ToDoList';
+import ToDoForm from '../components/ToDoForm';
 
 const HomeScreen = ({ navigation }) => {
   return (
     <MainLayout>
       <View style={styles.container}>
         <Text style={styles.header}>Welcome to the Amazing To Do List App!</Text>
+        <ToDoList />
+        <ToDoForm />
         <Pressable style={styles.button} onPress={() => navigation.navigate('About')}>
           <Text style={styles.buttonText}>Go to About</Text>
         </Pressable>
@@ -32,6 +36,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 5,
+    marginTop: 20,
   },
   buttonText: {
     color: 'white',
