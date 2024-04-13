@@ -6,7 +6,7 @@ import tasksData from '../data/tasks.json';
 const ToDoForm = ({ addTask }) => {
   const [taskText, setTaskText] = React.useState('');
   const [tasks, setTasks] = useState([]);
-  const [randomTask, setRandomTask] = useState('');
+  const [randomTask] = useState('');
 
   useEffect(() => {
     // Fetch tasks from the "tasks.json" file
@@ -24,7 +24,8 @@ const ToDoForm = ({ addTask }) => {
 
   const handleGenerateRandomTask = () => {
     const randomIndex = Math.floor(Math.random() * tasks.length);
-    setRandomTask(tasks[randomIndex]);
+    setTaskText(tasks[randomIndex]);
+  };
 
   return (
     <View style={styles.form}>
@@ -72,7 +73,4 @@ const styles = StyleSheet.create({
     color: '#333',
   },
 });
-
-};
-
 export default ToDoForm;

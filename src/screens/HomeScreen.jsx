@@ -42,6 +42,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
+  randomTask: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
 
 export default HomeScreen;
